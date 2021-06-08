@@ -11,6 +11,29 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
     <title>niloy portfolio</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/integration
+            emailjs.init('user_hq45Kda3XJzmTQQ06qP2e');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                // generate a five digit number for the contact_number variable
+                this.contact_number.value = Math.random() * 100000 | 0;
+                // these IDs from the previous steps
+                emailjs.sendForm('service_qi0wg6r', 'template_nlvgqdm', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -137,6 +160,14 @@
 
             <div class="portfolio__container bd-grid">
                 <div class="portfolio__img">
+                    <img src="assets/img/funpark.png" alt="">
+
+                    <div class="portfolio__link">
+                        <a href="https://funpark-cdfe5.web.app/" 
+                        class="portfolio__link-name">View details</a>
+                    </div>
+                </div>
+                <div class="portfolio__img">
                     <img src="assets/img/atlantic-transport.png" alt="">
 
                     <div class="portfolio__link">
@@ -179,12 +210,22 @@
             <h2 class="section-title">Contact</h2>
 
             <div class="contact__container bd-grid">
-                <form action="" class="contact__form">
+                <!-- <form action="" class="contact__form">
                     <input type="text" placeholder="Name" id="name" name="user_name" class="contact__input">
                     <input type="email" placeholder="Email" id="sender" name="user_email" class="contact__input">
                     <textarea name="message" id="message" name="message" cols="0" rows="10" class="contact__input"></textarea>
-                    <!-- <input onclick='sendMail()' type="button" value="Submit" class="contact__button button"> -->
-                    <button onclick='sendMail()' type="submit" value="Send" class="contact__button button">Submit</button>
+                    <input onclick='sendMail()' type="submit" value="Send" class="contact__button button">
+                    
+                </form> -->
+                <form class="contact__form" id="contact-form">
+                    <input type="hidden" name="contact_number">
+                    <label>Name</label>
+                    <input type="text" placeholder="Name" id="name" name="user_name" class="contact__input" name="user_name">
+                    <label>Email</label>
+                    <input type="email" placeholder="Email" id="sender" class="contact__input" name="user_email">
+                    <label>Message</label>
+                    <textarea name="message" id="message" name="message" cols="0" rows="10" class="contact__input"></textarea>
+                    <input type="submit" value="Send" class="contact__button button" value="Send">
                 </form>
             </div>
         </section>
@@ -210,15 +251,9 @@
 
     <script src="https://unpkg.com/scrollreveal"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function () {
-            emailjs.init("user_hq45Kda3XJzmTQQ06qP2e");
-        })();
-    </script>
 
-    <script src="script.js"></script>
     <script src="assets/js/main.js"></script>
+   
 </body>
 
 </html>
